@@ -68,6 +68,32 @@ class Esi extends Ccp\AbstractCcp implements EsiInterface {
     }
 
     /**
+     * verify character data by "access_token"
+     * -> get some basic information (like character id)
+     * -> if more character information is required, use ESI "characters" endpoints request instead
+     * @param string $accessToken
+     * @return RequestConfig
+     */
+    protected function getVerifyCharacterRequest(string $accessToken) : RequestConfig {
+        $requestOptions = [
+            'headers' => $this->getAuthHeader($accessToken, 'Bearer')
+        ];
+
+        return new RequestConfig(
+            WebClient::newRequest('GET', '/verify'),
+            $requestOptions,
+            function($body) : array {
+                $characterData = [];
+                if(!$body->error){
+                    $characterData = (new Mapper\Verify\Character($body))->getData();
+                }
+
+                return $characterData;
+            }
+        );
+    }
+
+    /**
      * @return RequestConfig
      */
     protected function getServerStatusRequest() : RequestConfig {

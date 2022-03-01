@@ -6,7 +6,7 @@
  * Time: 22:56
  */
 
-namespace Exodus4D\ESI\Mapper\Sso;
+namespace Exodus4D\ESI\Mapper\Esi\Verify;
 
 use Exodus4D\Pathfinder\Data\Mapper\AbstractIterator;
 

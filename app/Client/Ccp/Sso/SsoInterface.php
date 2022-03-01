@@ -18,11 +18,6 @@ interface SsoInterface {
     /**
      * @return string
      */
-    public function getVerifyUserEndpointURI() : string;
-
-    /**
-     * @return string
-     */
     public function getVerifyAuthorizationCodeEndpointURI() : string;
 
 }
